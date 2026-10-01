@@ -46,7 +46,7 @@ a.actor .ext{font-size:11px; opacity:.55;}
 <body>
 <div class="eyebrow">Veille concurrentielle IA — Zenextia</div>
 <h1>Matrice croisée cercle × risque<span class="dot">.</span></h1>
-<div class="sub">Base acteurs Notion (live) · 31 acteurs suivis<br>
+<div class="sub">Base acteurs Notion · 46 acteurs suivis · état au 01/10/2026 (revue 2026-T4)<br>
 Lignes = cercle concurrentiel (cadrage) · colonnes = niveau de risque (menace) · intensité = nombre d'acteurs.</div>
 
 <div class="hint">Cliquez sur un carré pour lister les acteurs, puis sur un nom pour ouvrir sa fiche PDF.</div>
@@ -63,7 +63,7 @@ Lignes = cercle concurrentiel (cadrage) · colonnes = niveau de risque (menace) 
 <div id="detail">Sélectionnez un carré de la matrice pour afficher les acteurs concernés.</div>
 
 <div class="bar"></div>
-<div class="foot">Usage interne Zenextia · Source : base Notion « Veille concurrentielle IA – ZenextIA » (état live).<br>
+<div class="foot">Usage interne Zenextia · Source : base Notion « Veille concurrentielle IA – ZenextIA » (état au 01/10/2026 — page statique, mise à jour à chaque revue).<br>
 Les liens ouvrent les fiches PDF sur Google Drive (dossier partagé équipe).</div>
 
 <script>
@@ -78,15 +78,21 @@ const ACTORS={
  'Concurrent direct':{
    'Élevé':[
      {n:'BlackFig',u:'https://drive.google.com/file/d/13xWWQJ0fyamUmEVRAl4fPndTa1PZSdnZ/view?usp=drivesdk'},
-     {n:'Koïno',u:'https://drive.google.com/file/d/12uE5hM9VUl0How1mfl_vhUZc4Q69jAsZ/view?usp=drivesdk'},
-     {n:'Nymphar.AI',u:'https://drive.google.com/file/d/1B030sLc5p7YIWAiiZBVjvjj3byi_k_Uk/view?usp=drivesdk'},
+     {n:'Juwa',u:'https://drive.google.com/file/d/114bV3L9F-rRWbv4fSed0apZviGLjObca/view?usp=drivesdk'},
      {n:'Kokoro',u:'https://drive.google.com/file/d/1RaNygQza3G4bGopsl5v9NQuW3jrBhq4p/view?usp=drivesdk'},
-     {n:'Juwa',u:'https://drive.google.com/file/d/1TE1gfucr_y29gjqIB3MUryBSHAF-1YZX/view?usp=drivesdk'}
+     {n:'Koïno',u:'https://drive.google.com/file/d/1HQwtd-2IdKVEI5clzQs6-cbjbOWY-jve/view?usp=drivesdk'},
+     {n:'Nymphar.AI',u:'https://drive.google.com/file/d/1B030sLc5p7YIWAiiZBVjvjj3byi_k_Uk/view?usp=drivesdk'}
    ],
    'Significatif':[
-     {n:'Catalia',u:'https://drive.google.com/file/d/1BIbTZz8QfzEvXpvZV9-hp0TwSN-l45aQ/view?usp=drivesdk'},
-     {n:'Palmer Consulting',u:'https://drive.google.com/file/d/1EcuyM6SyZdipFZcoqJA4TggFpMy58o7A/view?usp=drivesdk'},
-     {n:'Innovia',u:'https://drive.google.com/file/d/13spC8HJ3sNzJiEtdO1f8__cWR3TUFrS3/view?usp=drivesdk'}
+     {n:'Bonjour IA',u:'https://drive.google.com/file/d/1aDt9sccfI7rvThSdk2ez7fcRVJTM9QjD/view?usp=drivesdk'},
+     {n:'Catalia',u:'https://drive.google.com/file/d/1Zm41-HLKe9QhAd8EmyDDz0tMgvAdphMK/view?usp=drivesdk'},
+     {n:'ClaudIn',u:'https://drive.google.com/file/d/1u9OkcjowJDvyo1SQzmN-52Ddb48NtFtI/view?usp=drivesdk'},
+     {n:'Cross Data',u:'https://drive.google.com/file/d/1fwscYnOi2RAhS8m6i4HpDWGXtMMoppXb/view?usp=drivesdk'},
+     {n:'Datasulting',u:'https://drive.google.com/file/d/15Zb2HH5uCbcKA6vcGO_i9r2FdSbsqaUU/view?usp=drivesdk'},
+     {n:'Innovia',u:'https://drive.google.com/file/d/13spC8HJ3sNzJiEtdO1f8__cWR3TUFrS3/view?usp=drivesdk'},
+     {n:'Mister IA',u:'https://drive.google.com/file/d/1I8C7amuwypImvFzWP6BCMEACQm5V9JUs/view?usp=drivesdk'},
+     {n:'Neovision',u:'https://drive.google.com/file/d/1RRKxaufc79_8--Qtc_LaG7pRCqZIVgsp/view?usp=drivesdk'},
+     {n:'Palmer Consulting',u:'https://drive.google.com/file/d/1EcuyM6SyZdipFZcoqJA4TggFpMy58o7A/view?usp=drivesdk'}
    ],
    'Modéré':[
      {n:'Stema Partners',u:'https://drive.google.com/file/d/1sYjvEP_kkHSAkwpUdtmtITWzmobU-9u3/view?usp=drivesdk'}
@@ -97,41 +103,50 @@ const ACTORS={
  },
  'Concurrent indirect':{
    'Élevé':[
-     {n:'Craft AI',u:'https://drive.google.com/file/d/1xky38GRh2okfrQz11FQn1kCLKCMstvsy/view?usp=drivesdk'}
+     {n:'Craft AI',u:'https://drive.google.com/file/d/1cnhIewTydSgehLBqqoL4LWNK4U6UkGRc/view?usp=drivesdk'}
    ],
    'Significatif':[
-     {n:'Optima AI',u:'https://drive.google.com/file/d/1Dombgj2rzg7g76XQLDvoeNj3pvwcdaSQ/view?usp=drivesdk'},
+     {n:'Eleven Labs (agence)',u:'https://drive.google.com/file/d/1-XyAqjOYMzYAUTHV3C3cV0U1Qq_0oQGz/view?usp=drivesdk'},
      {n:'Flowt',u:'https://drive.google.com/file/d/1UVfCD3KhcAcRoAs-HtbKjeB3aXztsvJC/view?usp=drivesdk'},
-     {n:'Eleven Labs (agence)',u:'https://drive.google.com/file/d/17JUsiSPp8LOjqLw8ZyjLlckidQucICxV/view?usp=drivesdk'},
-     {n:'Lonestone',u:'https://drive.google.com/file/d/1XaFlptOe4Z_mn_fCTSELwmtRe_Itl__-/view?usp=drivesdk'}
+     {n:'Lonestone',u:'https://drive.google.com/file/d/1XaFlptOe4Z_mn_fCTSELwmtRe_Itl__-/view?usp=drivesdk'},
+     {n:'Optima AI',u:'https://drive.google.com/file/d/1Dombgj2rzg7g76XQLDvoeNj3pvwcdaSQ/view?usp=drivesdk'}
    ],
    'Modéré':[
-     {n:'Cellenza',u:'https://drive.google.com/file/d/1_e6r_L4k02bPGp-gJdJr79zHWD0la60z/view?usp=drivesdk'},
-     {n:'IA Agency (Lamri)',u:'https://drive.google.com/file/d/17pgiRoVMBHdrej7KB3lL9KEN6SEMFqTS/view?usp=drivesdk'},
      {n:'Axionable',u:'https://drive.google.com/file/d/1oJUlUAmSv0wbavKE41cEogwJ7JIpoR59/view?usp=drivesdk'},
+     {n:'Cellenza',u:'https://drive.google.com/file/d/1_e6r_L4k02bPGp-gJdJr79zHWD0la60z/view?usp=drivesdk'},
+     {n:'DevPoint',u:'https://drive.google.com/file/d/1NOG9AWGA2Kx03knIXm8_IU_d7XKcrG6G/view?usp=drivesdk'},
+     {n:'Digitallia',u:'https://drive.google.com/file/d/1eq9ro0fcuDudDrekhKgxR4MnDPeYhWea/view?usp=drivesdk'},
+     {n:'IA Agency (Lamri)',u:'https://drive.google.com/file/d/17pgiRoVMBHdrej7KB3lL9KEN6SEMFqTS/view?usp=drivesdk'},
      {n:"L'Agence LLM",u:'https://drive.google.com/file/d/1hQN6Y5nqv_eiEiSlWPgwOXI2SqRziHJc/view?usp=drivesdk'},
-     {n:'Mozza',u:'https://drive.google.com/file/d/1e9WcEtkOmhihoPKuewq-qJ2W92NCuZSV/view?usp=drivesdk'}
+     {n:'Mozza',u:'https://drive.google.com/file/d/1e9WcEtkOmhihoPKuewq-qJ2W92NCuZSV/view?usp=drivesdk'},
+     {n:'Solanys',u:'https://drive.google.com/file/d/1SrplXawR10Z5dVRg3mhouurFYrdoG1Km/view?usp=drivesdk'},
+     {n:'Yes We Prompt',u:'https://drive.google.com/file/d/1hUl4XRWg8MgwIdcZwmTx4_6B-z9Cc_y4/view?usp=drivesdk'}
    ],
    'Faible':[
+     {n:'Dimarc',u:'https://drive.google.com/file/d/1K_FG-13ajIzI4hhYAiz0ZCuW4-z13WOZ/view?usp=drivesdk'},
      {n:'Long tail freelances / micro-agences',u:'https://drive.google.com/file/d/1QkTzHkwPiAlN-MJ8h1clFIKGle3nGb3f/view?usp=drivesdk'},
      {n:'Offres cloud hyperscalers',u:'https://drive.google.com/file/d/1vjvzvIqF63fPs-6M6xAJQTqJNi3iXbdg/view?usp=drivesdk'},
-     {n:'Dimarc',u:'https://drive.google.com/file/d/1K_FG-13ajIzI4hhYAiz0ZCuW4-z13WOZ/view?usp=drivesdk'}
+     {n:'TW3 Partners',u:'https://drive.google.com/file/d/1usf2p5_5GvqHhWbNsUWutHNSbkiLB7Oe/view?usp=drivesdk'}
    ]
  },
  'Entrant potentiel':{
    'Élevé':[],
    'Significatif':[],
    'Modéré':[
-     {n:'Artefact',u:'https://drive.google.com/file/d/1iMxdgpBzthMWpJRScufkWMSH2pWGfJsV/view?usp=drivesdk'},
-     {n:'Quantmetry (Capgemini Invent)',u:'https://drive.google.com/file/d/1_JtpzkWyMPDKCuBk_4yiDy_xaVGNKUJm/view?usp=drivesdk'},
      {n:'Aquila Data Enabler',u:'https://drive.google.com/file/d/1t7JIsZ89nzkEo034DfjCbVUT4HgPiZQS/view?usp=drivesdk'},
+     {n:'Artefact',u:'https://drive.google.com/file/d/1M8qMYxbg2Yhfy2PhmUk8wVU6Yg-T7OGs/view?usp=drivesdk'},
+     {n:'Avencore',u:'https://drive.google.com/file/d/15d6LvsU_SkpXah2yY0l2_cFyZ9HLcVNJ/view?usp=drivesdk'},
      {n:'Converteo',u:'https://drive.google.com/file/d/1z4NuPbdE9DxMYW9EnygP0COiD2hAECFh/view?usp=drivesdk'},
+     {n:'Hubvisory Group',u:'https://drive.google.com/file/d/15g-CXywIquXmiu2cua_yaM1dMXts6Hbo/view?usp=drivesdk'},
      {n:'La Javaness',u:'https://drive.google.com/file/d/1AxAMXa0Mm_7SPfdRG-gYWQ7ciszbsTP7/view?usp=drivesdk'},
-     {n:'Sia Partners (Sia AI)',u:'https://drive.google.com/file/d/1JdtJsdk-ZfKAmQR359Kui58YtbrKF0sO/view?usp=drivesdk'}
+     {n:'Next Decision',u:'https://drive.google.com/file/d/1g0_aSJG0lzHpUTA_odBPVmMQEkXCKQQ0/view?usp=drivesdk'},
+     {n:'Sia Partners (Sia AI)',u:'https://drive.google.com/file/d/1JH_x2CW2FlWASp5hHtEFxGLn7D3GImp1/view?usp=drivesdk'}
    ],
    'Faible':[
+     {n:'Big 4 + BCG Gamma',u:'https://drive.google.com/file/d/1LFn9kI6dcCwMEyal11KuVDUbvnAIoC5X/view?usp=drivesdk'},
      {n:'Grandes ESN généralistes',u:'https://drive.google.com/file/d/1p7vEm5wkJhkNLR9mSRFLXvLcChaPNMy3/view?usp=drivesdk'},
-     {n:'Big 4 + BCG Gamma',u:'https://drive.google.com/file/d/1LFn9kI6dcCwMEyal11KuVDUbvnAIoC5X/view?usp=drivesdk'}
+     {n:'IA PME Conseil',u:'https://drive.google.com/file/d/1yZYEW7s3ZQ5YKbGzKJdVKsiwWFHdLwJl/view?usp=drivesdk'},
+     {n:'Quantmetry (Capgemini Invent)',u:'https://drive.google.com/file/d/1a44HzOBd_XGAsDLAIFgbfFDjF7AqO3th/view?usp=drivesdk'}
    ]
  }
 };
