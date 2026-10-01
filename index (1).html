@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matrice croisée cercle × risque — Veille concurrentielle IA Zenextia</title>
+<style>
+:root{
+  color-scheme: light;
+  --ze-dark:#232a3a; --ze-accent:#5cc8d2; --ze-blue:#185fa5;
+  --bg:#ffffff; --soft:#f2f2fa; --border:#e6e6f0;
+  --text:#232a3a; --muted:#8a93a3;
+  --r-eleve:#d03b3b; --r-signif:#eb6834; --r-modere:#eda100; --r-faible:#898781;
+}
+*{box-sizing:border-box;}
+body{margin:0; padding:28px 26px 34px; background:var(--bg); color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;}
+h1{font-family:'Exo','Inter',sans-serif; font-size:22px; font-weight:800; margin:0; color:var(--ze-dark);}
+.eyebrow{font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; font-weight:600;}
+.sub{font-size:13px; color:var(--muted); margin-top:6px; line-height:1.5;}
+.dot{color:var(--ze-accent);}
+.hint{font-size:13px; color:var(--muted); margin:22px 0 12px;}
+#matrix{display:grid; grid-template-columns:150px repeat(4,1fr); gap:5px; max-width:760px;}
+.colhead{text-align:center; font-size:12px; color:var(--muted); font-weight:600; padding-bottom:4px;}
+.rowlabel{display:flex; align-items:center; font-size:13.5px; font-weight:500; color:var(--ze-dark); padding-right:8px;}
+.cell{border:1px solid var(--border); font-size:18px; font-weight:600; height:64px; border-radius:8px;
+  display:flex; align-items:center; justify-content:center; font-family:inherit; transition:transform .08s, box-shadow .08s; outline:none;}
+.cell.clickable{cursor:pointer;}
+.cell.clickable:hover{transform:translateY(-1px); box-shadow:0 2px 8px rgba(35,42,58,.12);}
+.cell.active{box-shadow:0 0 0 2px var(--ze-accent);}
+.legend{display:flex; flex-wrap:wrap; gap:16px; margin:16px 0 0; font-size:12px; color:var(--muted); max-width:760px;}
+.legend span{display:flex; align-items:center; gap:6px;}
+.chip{width:11px; height:11px; border-radius:3px; display:inline-block;}
+#detail{margin-top:18px; background:var(--soft); border-radius:12px; padding:16px 18px; min-height:52px;
+  font-size:13px; color:var(--muted); max-width:760px;}
+#detail .title{font-weight:600; color:var(--ze-dark); margin-bottom:10px; display:flex; align-items:center; gap:8px;}
+a.actor{display:inline-flex; align-items:center; gap:5px; background:#fff; border:1px solid var(--border); border-radius:7px;
+  padding:5px 11px; margin:4px 5px 0 0; font-size:13px; color:var(--ze-dark); text-decoration:none; transition:border-color .1s, background .1s;}
+a.actor:hover{border-color:var(--ze-blue); background:#f4f8fd; color:var(--ze-blue);}
+a.actor .ext{font-size:11px; opacity:.55;}
+.foot{font-size:11px; color:var(--muted); margin-top:22px; max-width:760px; line-height:1.5;}
+.bar{height:6px; width:760px; max-width:100%; margin-top:20px; border-radius:3px;
+  background:linear-gradient(92deg,#01f8f5,#006ef0);}
+</style>
+</head>
+<body>
+<div class="eyebrow">Veille concurrentielle IA — Zenextia</div>
+<h1>Matrice croisée cercle × risque<span class="dot">.</span></h1>
+<div class="sub">Base acteurs Notion · 46 acteurs suivis · état au 01/10/2026 (revue 2026-T4)<br>
+Lignes = cercle concurrentiel (cadrage) · colonnes = niveau de risque (menace) · intensité = nombre d'acteurs.</div>
+
+<div class="hint">Cliquez sur un carré pour lister les acteurs, puis sur un nom pour ouvrir sa fiche PDF.</div>
+
+<div id="matrix"></div>
+
+<div class="legend">
+  <span><span class="chip" style="background:var(--r-eleve)"></span>1 — Élevé</span>
+  <span><span class="chip" style="background:var(--r-signif)"></span>2 — Significatif</span>
+  <span><span class="chip" style="background:var(--r-modere)"></span>3 — Modéré</span>
+  <span><span class="chip" style="background:var(--r-faible)"></span>4 — Faible</span>
+</div>
+
+<div id="detail">Sélectionnez un carré de la matrice pour afficher les acteurs concernés.</div>
+
+<div class="bar"></div>
+<div class="foot">Usage interne Zenextia · Source : base Notion « Veille concurrentielle IA – ZenextIA » (état au 01/10/2026 — page statique, mise à jour à chaque revue).<br>
+Les liens ouvrent les fiches PDF sur Google Drive (dossier partagé équipe).</div>
+
+<script>
+const RISK=[
+ {key:'Élevé',short:'Élevé',color:'#d03b3b'},
+ {key:'Significatif',short:'Signif.',color:'#eb6834'},
+ {key:'Modéré',short:'Modéré',color:'#eda100'},
+ {key:'Faible',short:'Faible',color:'#898781'}
+];
+const CERCLE=['Concurrent direct','Concurrent indirect','Entrant potentiel'];
+const ACTORS={
+ 'Concurrent direct':{
+   'Élevé':[
+     {n:'BlackFig',u:'https://drive.google.com/file/d/13xWWQJ0fyamUmEVRAl4fPndTa1PZSdnZ/view?usp=drivesdk'},
+     {n:'Juwa',u:'https://drive.google.com/file/d/114bV3L9F-rRWbv4fSed0apZviGLjObca/view?usp=drivesdk'},
+     {n:'Kokoro',u:'https://drive.google.com/file/d/1RaNygQza3G4bGopsl5v9NQuW3jrBhq4p/view?usp=drivesdk'},
+     {n:'Koïno',u:'https://drive.google.com/file/d/1HQwtd-2IdKVEI5clzQs6-cbjbOWY-jve/view?usp=drivesdk'},
+     {n:'Nymphar.AI',u:'https://drive.google.com/file/d/1B030sLc5p7YIWAiiZBVjvjj3byi_k_Uk/view?usp=drivesdk'}
+   ],
+   'Significatif':[
+     {n:'Bonjour IA',u:'https://drive.google.com/file/d/1aDt9sccfI7rvThSdk2ez7fcRVJTM9QjD/view?usp=drivesdk'},
+     {n:'Catalia',u:'https://drive.google.com/file/d/1Zm41-HLKe9QhAd8EmyDDz0tMgvAdphMK/view?usp=drivesdk'},
+     {n:'ClaudIn',u:'https://drive.google.com/file/d/1u9OkcjowJDvyo1SQzmN-52Ddb48NtFtI/view?usp=drivesdk'},
+     {n:'Cross Data',u:'https://drive.google.com/file/d/1fwscYnOi2RAhS8m6i4HpDWGXtMMoppXb/view?usp=drivesdk'},
+     {n:'Datasulting',u:'https://drive.google.com/file/d/15Zb2HH5uCbcKA6vcGO_i9r2FdSbsqaUU/view?usp=drivesdk'},
+     {n:'Innovia',u:'https://drive.google.com/file/d/13spC8HJ3sNzJiEtdO1f8__cWR3TUFrS3/view?usp=drivesdk'},
+     {n:'Mister IA',u:'https://drive.google.com/file/d/1I8C7amuwypImvFzWP6BCMEACQm5V9JUs/view?usp=drivesdk'},
+     {n:'Neovision',u:'https://drive.google.com/file/d/1RRKxaufc79_8--Qtc_LaG7pRCqZIVgsp/view?usp=drivesdk'},
+     {n:'Palmer Consulting',u:'https://drive.google.com/file/d/1EcuyM6SyZdipFZcoqJA4TggFpMy58o7A/view?usp=drivesdk'}
+   ],
+   'Modéré':[
+     {n:'Stema Partners',u:'https://drive.google.com/file/d/1sYjvEP_kkHSAkwpUdtmtITWzmobU-9u3/view?usp=drivesdk'}
+   ],
+   'Faible':[
+     {n:'Zenithia',u:'https://drive.google.com/file/d/1AdnJ-_yVxPLKTYTBUXnPQ_AuL2d2o8kE/view?usp=drivesdk'}
+   ]
+ },
+ 'Concurrent indirect':{
+   'Élevé':[
+     {n:'Craft AI',u:'https://drive.google.com/file/d/1cnhIewTydSgehLBqqoL4LWNK4U6UkGRc/view?usp=drivesdk'}
+   ],
+   'Significatif':[
+     {n:'Eleven Labs (agence)',u:'https://drive.google.com/file/d/1-XyAqjOYMzYAUTHV3C3cV0U1Qq_0oQGz/view?usp=drivesdk'},
+     {n:'Flowt',u:'https://drive.google.com/file/d/1UVfCD3KhcAcRoAs-HtbKjeB3aXztsvJC/view?usp=drivesdk'},
+     {n:'Lonestone',u:'https://drive.google.com/file/d/1XaFlptOe4Z_mn_fCTSELwmtRe_Itl__-/view?usp=drivesdk'},
+     {n:'Optima AI',u:'https://drive.google.com/file/d/1Dombgj2rzg7g76XQLDvoeNj3pvwcdaSQ/view?usp=drivesdk'}
+   ],
+   'Modéré':[
+     {n:'Axionable',u:'https://drive.google.com/file/d/1oJUlUAmSv0wbavKE41cEogwJ7JIpoR59/view?usp=drivesdk'},
+     {n:'Cellenza',u:'https://drive.google.com/file/d/1_e6r_L4k02bPGp-gJdJr79zHWD0la60z/view?usp=drivesdk'},
+     {n:'DevPoint',u:'https://drive.google.com/file/d/1NOG9AWGA2Kx03knIXm8_IU_d7XKcrG6G/view?usp=drivesdk'},
+     {n:'Digitallia',u:'https://drive.google.com/file/d/1eq9ro0fcuDudDrekhKgxR4MnDPeYhWea/view?usp=drivesdk'},
+     {n:'IA Agency (Lamri)',u:'https://drive.google.com/file/d/17pgiRoVMBHdrej7KB3lL9KEN6SEMFqTS/view?usp=drivesdk'},
+     {n:"L'Agence LLM",u:'https://drive.google.com/file/d/1hQN6Y5nqv_eiEiSlWPgwOXI2SqRziHJc/view?usp=drivesdk'},
+     {n:'Mozza',u:'https://drive.google.com/file/d/1e9WcEtkOmhihoPKuewq-qJ2W92NCuZSV/view?usp=drivesdk'},
+     {n:'Solanys',u:'https://drive.google.com/file/d/1SrplXawR10Z5dVRg3mhouurFYrdoG1Km/view?usp=drivesdk'},
+     {n:'Yes We Prompt',u:'https://drive.google.com/file/d/1hUl4XRWg8MgwIdcZwmTx4_6B-z9Cc_y4/view?usp=drivesdk'}
+   ],
+   'Faible':[
+     {n:'Dimarc',u:'https://drive.google.com/file/d/1K_FG-13ajIzI4hhYAiz0ZCuW4-z13WOZ/view?usp=drivesdk'},
+     {n:'Long tail freelances / micro-agences',u:'https://drive.google.com/file/d/1QkTzHkwPiAlN-MJ8h1clFIKGle3nGb3f/view?usp=drivesdk'},
+     {n:'Offres cloud hyperscalers',u:'https://drive.google.com/file/d/1vjvzvIqF63fPs-6M6xAJQTqJNi3iXbdg/view?usp=drivesdk'},
+     {n:'TW3 Partners',u:'https://drive.google.com/file/d/1usf2p5_5GvqHhWbNsUWutHNSbkiLB7Oe/view?usp=drivesdk'}
+   ]
+ },
+ 'Entrant potentiel':{
+   'Élevé':[],
+   'Significatif':[],
+   'Modéré':[
+     {n:'Aquila Data Enabler',u:'https://drive.google.com/file/d/1t7JIsZ89nzkEo034DfjCbVUT4HgPiZQS/view?usp=drivesdk'},
+     {n:'Artefact',u:'https://drive.google.com/file/d/1M8qMYxbg2Yhfy2PhmUk8wVU6Yg-T7OGs/view?usp=drivesdk'},
+     {n:'Avencore',u:'https://drive.google.com/file/d/15d6LvsU_SkpXah2yY0l2_cFyZ9HLcVNJ/view?usp=drivesdk'},
+     {n:'Converteo',u:'https://drive.google.com/file/d/1z4NuPbdE9DxMYW9EnygP0COiD2hAECFh/view?usp=drivesdk'},
+     {n:'Hubvisory Group',u:'https://drive.google.com/file/d/15g-CXywIquXmiu2cua_yaM1dMXts6Hbo/view?usp=drivesdk'},
+     {n:'La Javaness',u:'https://drive.google.com/file/d/1AxAMXa0Mm_7SPfdRG-gYWQ7ciszbsTP7/view?usp=drivesdk'},
+     {n:'Next Decision',u:'https://drive.google.com/file/d/1g0_aSJG0lzHpUTA_odBPVmMQEkXCKQQ0/view?usp=drivesdk'},
+     {n:'Sia Partners (Sia AI)',u:'https://drive.google.com/file/d/1JH_x2CW2FlWASp5hHtEFxGLn7D3GImp1/view?usp=drivesdk'}
+   ],
+   'Faible':[
+     {n:'Big 4 + BCG Gamma',u:'https://drive.google.com/file/d/1LFn9kI6dcCwMEyal11KuVDUbvnAIoC5X/view?usp=drivesdk'},
+     {n:'Grandes ESN généralistes',u:'https://drive.google.com/file/d/1p7vEm5wkJhkNLR9mSRFLXvLcChaPNMy3/view?usp=drivesdk'},
+     {n:'IA PME Conseil',u:'https://drive.google.com/file/d/1yZYEW7s3ZQ5YKbGzKJdVKsiwWFHdLwJl/view?usp=drivesdk'},
+     {n:'Quantmetry (Capgemini Invent)',u:'https://drive.google.com/file/d/1a44HzOBd_XGAsDLAIFgbfFDjF7AqO3th/view?usp=drivesdk'}
+   ]
+ }
+};
+const counts=CERCLE.map(c=>RISK.map(r=>ACTORS[c][r.key].length));
+const max=Math.max(...counts.flat());
+const m=document.getElementById('matrix');
+const detail=document.getElementById('detail');
+let activeCell=null;
+function shade(v){ if(v===0) return {bg:'#f7f7fb',fg:'#b9bfca'}; const t=0.14+0.86*(v/max); return {bg:'rgba(24,95,165,'+t.toFixed(2)+')', fg:t>0.55?'#ffffff':'#0c447c'}; }
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+m.appendChild(document.createElement('div'));
+RISK.forEach(r=>{const h=document.createElement('div'); h.className='colhead'; h.textContent=r.short; m.appendChild(h);});
+CERCLE.forEach((c,i)=>{
+  const rl=document.createElement('div'); rl.className='rowlabel'; rl.textContent=c; m.appendChild(rl);
+  RISK.forEach((r,j)=>{
+    const v=counts[i][j]; const s=shade(v);
+    const cell=document.createElement('button');
+    cell.className='cell'+(v?' clickable':''); cell.textContent=v;
+    cell.style.background=s.bg; cell.style.color=s.fg;
+    cell.setAttribute('aria-label',c+', risque '+r.key+' : '+v+' acteurs');
+    if(v){
+      cell.onclick=()=>{
+        if(activeCell) activeCell.classList.remove('active');
+        cell.classList.add('active'); activeCell=cell;
+        const list=ACTORS[c][r.key].map(a=>'<a class="actor" href="'+a.u+'" target="_blank" rel="noopener">'+esc(a.n)+'<span class="ext">&#8599;</span></a>').join('');
+        detail.innerHTML='<div class="title"><span class="chip" style="background:'+r.color+'"></span>'+c+' — '+r.key+' · '+v+' acteur(s)</div>'+list;
+      };
+    }
+    m.appendChild(cell);
+  });
+});
+</script>
+</body>
+</html>
